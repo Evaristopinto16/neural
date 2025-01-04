@@ -1,16 +1,18 @@
-import strategy from "passport-local";
-const LocalStrategy = strategy.Strategy
+import jwt from "jsonwebtoken";
 
-async function passport(passport) {
-   console.log("OI")
-   passport.use(
-    new LocalStrategy(
-       async function(email, password, done){
-            console.log(email, password)
-        }
-    )
-   ) 
-}
+async function verifJWT(req, res, next) {
+   const token = await req.headers["authorization"];
+ 
+   console.log(token)
+   if(!token){
+     return res.status(401).json({auth: false, message: "Unauthorized"})
+   }
+   jwt.verify(token, "secretKey", (err, decoded)=>{
+       if(err) return res.status(500).json({auth: false, message: "error to authenticate token"});
+ 
+       req.userId = decoded
+       next()
+   })
+ }
 
-
-export default passport
+export default verifJWT

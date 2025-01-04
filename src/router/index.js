@@ -6,9 +6,15 @@ import controllerUser from "../controller/controllerUser/index.js";
 import modelcontroller from "../controller/modelcontroller/index.js";
 import chatcontroller from "../controller/chatcontroller/index.js";
 import loginController from "../controller/loginController/index.js";
+import verifJWT from "../../config/auth.js"
 
+ 
 
-
+ 
+router.get('/clientes', verifJWT, (req, res, next) => { 
+  console.log("Retornou todos clientes!");
+  res.json([{id:1,nome:'luiz', }]);
+})
 
 
 router.post('/home', function(req, res) {
@@ -45,7 +51,7 @@ router.get("/model/get/", modelcontroller.get)
 
 
 //api chat
-router.post("/api/chat/:id", chatcontroller.chat)
+router.post("/api/chat/",verifJWT, chatcontroller.chat)
 
 
 

@@ -1,8 +1,31 @@
 import users from "../../models/entity/users/index.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 const Users = new users()
 
+/*
+
+ 
+function verifyJWT(req, res, next){
+    const token = req.headers['authorization'];
+    if (!token) return res.status(401).json({ auth: false, message: 'No token provided.' });
+    
+    jwt.verify(token, process.env.SECRET, function(err, decoded) {
+      if (err) return res.status(500).json({ auth: false, message: 'Failed to authenticate token.' });
+      
+      // se tudo estiver ok, salva no request para uso posterior
+      req.userId = decoded.id;
+      next();
+    });
+} 
+
+*/
+
+
+
 export default {
+
+    
     async userRegister(req, res){
     
         try {
@@ -158,24 +181,42 @@ export default {
 
 
     async userLogin(req, res){
-        let {email} = req.body;
-        if(email){
+        let {email, password} = req.body;
+        if(email && password){
             try {
 
-                console.log(email)
-                let result = await Users.findByEmail(email)
-                res
-                .status(200)
-                .json(result)
+                console.log(email, password)
+                 await Users.findByEmail(email).then((result)=>{
+                     if(result.password === password){
+
+                    let id = result.id
+                    const token = jwt.sign({id}, "secretKey", {expiresIn: "1h"})
+
+
+                    res.json( {token: token, result})
+
+                }else{
+                    console.log("email or password incorrect")
+                    res.json({message: "email or password incorrect"})
+                }
+                }).catch((error)=>{
+                    console.log("login invalid")
+                })
+
+               
+                
             } catch (error) {
                 res
                 .status(302)
                 .json(error)
             }
         }else{
+            console.log("email or password incorrect")
             res
             .status(302)
-            .json("oi")
+           
+            
+            .json({message: "email or password incorrect"})
         }
        
     }

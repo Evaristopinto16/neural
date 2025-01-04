@@ -7,9 +7,12 @@ export default {
 
     async chat(req, res){
 
-        const id = req.params.id;
+    let id = req.userId;
 
         if(id) {
+            id = id.id
+
+            console.log(id)
 
             const {message, model} = req.body;
 

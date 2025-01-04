@@ -16,7 +16,7 @@ class users {
             console.log("error to register user",error)
         }
     }
-
+    
     async findById(id){
         const query = `SELECT * FROM users WHERE id = $1`;
         const values = [id];
@@ -86,6 +86,20 @@ class users {
             console.log(error)
         }
     }
-}
+    async findByEmail(email){
+        const query = `SELECT * FROM users WHERE email = $1`;
+        const value = [email];
+
+        try {
+            const result = await pool.query(query, value);
+            const user = result.rows[0];
+            return user;
+            
+        } catch (error) {
+            console.error("Error in findById users")
+        }
+    }
+} 
+
 
 export default users
