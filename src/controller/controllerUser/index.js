@@ -161,6 +161,8 @@ export default {
         let {email} = req.body;
         if(email){
             try {
+
+                console.log(email)
                 let result = await Users.findByEmail(email)
                 res
                 .status(200)
@@ -168,7 +170,7 @@ export default {
             } catch (error) {
                 res
                 .status(302)
-                .redirect("/")
+                .json(error)
             }
         }else{
             res

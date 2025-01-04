@@ -21,7 +21,9 @@ router.get("/", controller.home);
 
 //login
 
-router.post("/login", loginController.logir)
+//router.post("/login", loginController.logir)
+router.post("/login", controllerUser.userLogin)
+
 
 router.get("/balance/get/:id", controllerBalances.findOneBalance);
 router.post("/addbalance", controllerBalances.addBalance)

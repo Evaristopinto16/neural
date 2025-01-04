@@ -7,7 +7,7 @@ export default  {
         let {email, password} = req.body
 
         if(email, password){
-            
+            await Users.fi
         }else{
             res.json(
                 {
