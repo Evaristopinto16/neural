@@ -1,7 +1,9 @@
 import OpenAI from 'openai';
+import { config } from 'dotenv';
+config()
 
 const openai = new OpenAI({
-  apiKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc3YjEyMWFlLWUwZDYtNDliMi1iNjlmLTBkNzE3ODkzYjgzOSIsImlzRGV2ZWxvcGVyIjp0cnVlLCJpYXQiOjE3Mjc2OTA0MTgsImV4cCI6MjA0MzI2NjQxOH0.0_rVXKNuSCBP4MO6hBnTXAE0kE1h52xpwDSGPaR4vGM',
+  apiKey: process.env.OPENAI_KEY,
   baseURL: 'https://bothub.chat/api/v2/openai/v1'
 });
 
