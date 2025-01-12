@@ -1,9 +1,7 @@
 import express from "express";
 import server from "./server.js";
 import router from "./router/index.js";
-import bcrypt from "bcryptjs";
-import passport from "passport"
-import flash from "connect-flash"
+
 import session from "express-session";
  
  const app = express();
@@ -28,7 +26,7 @@ app.use(session({
     next()
   })
    
-app.use(router)
+app.use("/api/v1/", router)
  
  
 

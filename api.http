@@ -1,0 +1,63 @@
+
+
+
+get http://localhost:3000/
+
+###
+post http://localhost:3000/user/register
+Content-Type: "application/json"
+{
+   
+"name": "Cassova",
+"email": "eflavio1@gmail.com",
+"role": "admin",
+ "password": "admin"
+   
+ 
+}
+
+###
+post http://localhost:3000/api/v1/login HTTP/1.1
+content-type: application/json
+
+{
+    "email":"evaristo1@gmail.com",
+"password":"12Tedjfgw3@gmail"
+}
+
+###
+post http://localhost:3000/api/v1/chat/
+content-type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzM2MDc4ODY1LCJleHAiOjE3MzYwODI0NjV9.omnHqg8i4ysfl3MGVcYiG9LYeH0gQqSm4_VyaB8rYl0
+
+{
+     "message": "ola mundo", 
+  "model": "gpt-4"
+}
+
+###
+get http://localhost:3000/api/v1//user/get/
+
+###
+get http://localhost:3000/user/get/2
+
+###
+
+get http://localhost:3000/api/v1/model/get/
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzM2MDc4ODY1LCJleHAiOjE3MzYwODI0NjV9.omnHqg8i4ysfl3MGVcYiG9LYeH0gQqSm4_VyaB8rYl0
+
+###
+
+post http://localhost:3000/api/v1/model/register
+
+
+###
+get http://localhost:3000/api/v1/model/update/:id 
+###
+get http://localhost:3000/api/v1/model/delet/:id 
+###
+get http://localhost:3000/api/v1/model/get/:id
+
+###
+get http://localhost:3000/api/v1/model/get/ 

@@ -10,18 +10,9 @@ import verifJWT from "../../config/auth.js"
 
  
 
- 
-router.get('/clientes', verifJWT, (req, res, next) => { 
-  console.log("Retornou todos clientes!");
-  res.json([{id:1,nome:'luiz', }]);
-})
 
 
-router.post('/home', function(req, res) {
-    res
-   
-    .redirect(302, '/');
-  });
+
 // home 
 router.get("/", controller.home);
 
@@ -46,12 +37,12 @@ router.post("/model/register", modelcontroller.setModel)
 router.post("/model/update/:id", modelcontroller.update)
 router.get("/model/delet/:id", modelcontroller.delete)
 router.get("/model/get/:id", modelcontroller.getOne)
-router.get("/model/get/", modelcontroller.get)
+router.get("/model/get/",verifJWT, modelcontroller.get)
 
 
 
 //api chat
-router.post("/api/chat/",verifJWT, chatcontroller.chat)
+router.post("/chat/",verifJWT, chatcontroller.chat)
 
 
 

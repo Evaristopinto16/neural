@@ -1,5 +1,5 @@
 import users from "../../models/entity/users/index.js";
-import bcrypt from "bcryptjs";
+ 
 import jwt from "jsonwebtoken";
 const Users = new users()
 
@@ -40,42 +40,25 @@ export default {
                     password
                 }
 
-              await  bcrypt.genSalt(10,async function(err, salt) {
-                     
-                bcrypt.hash(newUser.password, salt,async function(err, hash) {
-                        if(err){
-                            res.redirect("/")
-                        }
-
-                        newUser.password = hash
-                        console.log(newUser)
-                        let result  =  await Users.save(newUser)
-
-                        if(result){
-                            res
-                            .status(200)
-                            .json(
-                                result
-                            )
-                         }else{
-        
-                            console.log("oi")
-                            res
-                            
-                            .redirect("http://localhost:3000/")
-                         }
-
-                    });
-                });
+                let result  =  await Users.save(newUser)
+ 
+                    res
+                    .status(200)
+                    .json(
+                        result
+                    )
+                 
 
                
 
             }else{
-                console.log("oi1")
+                
 
                 res
                
-                .redirect("http://localhost:3000/")
+                .json({
+                    message: "empty field"
+                })
                 
             }
          
@@ -84,9 +67,12 @@ export default {
 
 
         } catch (error) {
-            console.log("oi2", error)
-
-            res.redirect("http://localhost:3000/")
+            res
+            .json(
+                {
+                    message: "error create user"
+                }
+            )
         } 
     },
 
@@ -182,6 +168,8 @@ export default {
 
     async userLogin(req, res){
         let {email, password} = req.body;
+
+        console.log(req.body)
         if(email && password){
             try {
 
