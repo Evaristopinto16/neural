@@ -41,12 +41,19 @@ export default {
                 }
 
                 let result  =  await Users.save(newUser)
- 
+
+                if(result >= 0){
                     res
                     .status(200)
                     .json(
                         result
                     )
+                }else{
+                     
+                    res.json(result)
+                }
+ 
+                    
                  
 
                

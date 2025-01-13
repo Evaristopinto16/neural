@@ -4,14 +4,14 @@
 get http://localhost:3000/
 
 ###
-post http://localhost:3000/user/register
-Content-Type: "application/json"
-{
-   
-"name": "Cassova",
-"email": "eflavio1@gmail.com",
-"role": "admin",
- "password": "admin"
+post http://localhost:3000/api/v1/user/register
+Content-Type: application/json
+
+{   
+"name": "nelsa",
+"email": "nelsa1@gmail.com",
+"role": "user",
+ "password": "user"
    
  
 }

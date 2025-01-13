@@ -8,12 +8,21 @@ class users {
         const values = [user.name, user.email, user.role, user.password];
 
         try {
-           await pool.query(query, values);
-           console.log("user solve")
-           return user
+            let userData
+          let x = await pool.query(query, values);
+          if(x.rowCount > 0){
+            userData = user
+          }else{
+            userData = x
+          }
+           return userData
             
         } catch (error) {
-            console.log("error to register user",error)
+             
+            return {
+                status: 409,
+                message: error
+            }
         }
     }
     
