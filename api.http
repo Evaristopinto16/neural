@@ -9,7 +9,7 @@ Content-Type: application/json
 
 {   
 "name": "nelsa",
-"email": "nelsa1@gmail.com",
+"email": "nelsa2@gmail.com",
 "role": "user",
  "password": "user"
    
@@ -61,3 +61,6 @@ get http://localhost:3000/api/v1/model/get/:id
 
 ###
 get http://localhost:3000/api/v1/model/get/ 
+###
+
+get https://exam.priem.etu.ru/api/
